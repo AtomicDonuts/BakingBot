@@ -38,7 +38,7 @@ BakingBot.renamebakery = function(){
 	Game.bakeryNamePrompt(); Game.ConfirmPrompt();
 }	
 	
-//{Menu
+//------------Menu-------------
 if(!BakingBot.Backup) BakingBot.Backup = {};
 BakingBot.Config = {};
 BakingBot.ConfigData = {};
