@@ -6,7 +6,7 @@
 var BakingBot
 if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.001";
-BakingBot.gameVersion = "2.022";
+BakingBot.gameVersion = "2.021";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.waitfor = 0;
 
