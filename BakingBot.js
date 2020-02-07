@@ -154,15 +154,13 @@ Game.UpdateMenu = function() {
 //}	
 //---------Init--------
 
-if (Game.prefs.popups) Game.Popup('BakingBot version ' + BakingBot.gameVersion + ' loaded!');
-else BakingBot.notify('BakingBot version ' + BakingBot.gameVersion + ' loaded!');
-
-	
-if (Game.version!=BakingBot.gameVersion){ 
+if(Game.version == BakingBot.gameVersion){
+	if (Game.prefs.popups) Game.Popup('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
+	else BakingBot.notify('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
+}else{ 
   BakingBot.notify("Warning: BakingBot is last tested with "+
     "cookie clicker version " + BakingBot.gameVersion);
 }
-
 
 	
 	
