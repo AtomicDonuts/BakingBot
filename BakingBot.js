@@ -1,3 +1,8 @@
+// BakingBot 
+// bakingbot is a simple bot that will get "Speed Baking III" for you
+// since SB3 Achievements is basically based on luck and there isn't any real strategy ,it should be perfectly legit 
+
+
 var BakingBot
 if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.001";
@@ -20,16 +25,15 @@ BakingBot.restart = function(){
 	
 }
 
+BakingBot.autoclickbc = function(){
+	
+}
+
 //Utilities
 
 BakingBot.notify = function(BakingText) { 
   console.log("Notify: "+BakingText); 
   Game.Notify("BakingBot News",BakingText,[14,5],100); 
-}
-
-if (Game.version!=BakingBot.gameVersion){ 
-  BakingBot.notify("Warning: cookieBot is last tested with "+
-    "cookie clicker version " + BakingBot.gameVersion);
 }
 
 BakingBot.renamebakery = function(){
@@ -38,7 +42,7 @@ BakingBot.renamebakery = function(){
 	Game.bakeryNamePrompt(); Game.ConfirmPrompt();
 }	
 	
-//------------Menu-------------
+//{Menu
 if(!BakingBot.Backup) BakingBot.Backup = {};
 BakingBot.Config = {};
 BakingBot.ConfigData = {};
@@ -94,7 +98,7 @@ BakingBot.ToggleConfigUp = function(config) {
 }
 
 BakingBot.ConfigData.ClickSpeed = 
-  {label: ['OFF','3','6','9','12','20'], desc: 'How many click in 1 sec'};
+  {label: ['OFF','3','6','9','12','15','18'], desc: 'How many click in 1 sec'};
 	
 	
 BakingBot.ConfigDefault = {ClickSpeed: 2,};	
@@ -147,4 +151,38 @@ Game.UpdateMenu = function() {
   BakingBot.Backup.UpdateMenu();
   if (Game.onMenu == 'prefs') BakingBot.Disp.AddMenuPref();
 }	
+//}	
+//---------Init--------
+
+if (Game.prefs.popups) Game.Popup('BakingBot version ' + BakingBot.gameVersion + ' loaded!');
+else BakingBot.notify('BakingBot version ' + BakingBot.gameVersion + ' loaded!');
+
 	
+if (Game.version!=BakingBot.gameVersion){ 
+  BakingBot.notify("Warning: BakingBot is last tested with "+
+    "cookie clicker version " + BakingBot.gameVersion);
+}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*Game.Ascend(true);
+
+
+if (!Game.Achievements["Speed baking III"].won && !Game.OnAscend) { 
+    Game.PickAscensionMode(); Game.nextAscensionMode = 1; Game.ConfirmPrompt(); Game.Reincarnate(true);
+}*/
