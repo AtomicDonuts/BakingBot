@@ -6,9 +6,10 @@
 var BakingBot
 if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.001";
-BakingBot.gameVersion = "2.021";
+BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.waitfor = 0;
+BakingBot.ClickSpeedBkp = BakingBot.ConfigDefault.ClickSpeed
 
 
 BakingBot.run = function(){
@@ -26,6 +27,8 @@ BakingBot.restart = function(){
 }
 
 BakingBot.autoclickbc = function(){
+	if(!BakingBot.autoclicker && (BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp))
+		alert("cambio click speed");
 	
 }
 
@@ -158,29 +161,6 @@ if(Game.version == BakingBot.gameVersion){
 	if (Game.prefs.popups) Game.Popup('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
 	else BakingBot.notify('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
 }else{ 
-  BakingBot.notify("Warning: BakingBot is last tested with "+
-    "cookie clicker version " + BakingBot.gameVersion);
+  Game.Notify("BakingBot News","Warning: BakingBot is last tested with "+"cookie clicker version " + BakingBot.gameVersion,[15,5],100);
 }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-/*Game.Ascend(true);
-
-
-if (!Game.Achievements["Speed baking III"].won && !Game.OnAscend) { 
-    Game.PickAscensionMode(); Game.nextAscensionMode = 1; Game.ConfirmPrompt(); Game.Reincarnate(true);
-}*/
