@@ -11,14 +11,15 @@ BakingBot.robotName = "BakingBot is helping ";
 BakingBot.waitfor = 0;
 
 
+
 BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if (BakingBot.now >= Game.startDate + 15*60*1000){
-		//BakingBot.restart();
+		BakingBot.restart();
 	}
 	BakingBot.autoclickbc();
-	//BakingBot.autoclickgc();	
+	BakingBot.autoclickgc();	
 }
 
 BakingBot.restart = function(){
@@ -26,7 +27,7 @@ BakingBot.restart = function(){
 }
 
 BakingBot.autoclickbc = function(){
-	//if(!BakingBot.autoclicker && (BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp))
+	if(!BakingBot.autoclicker && (BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp))
 		//alert("cambio click speed");
 	
 }
@@ -163,3 +164,4 @@ if(Game.version == BakingBot.gameVersion){
   Game.Notify("BakingBot News","Warning: BakingBot is last tested with "+"cookie clicker version " + BakingBot.gameVersion,[15,5],100);
 }
 BakingBot.starter = setInterval(BakingBot.run,300);
+BakingBot.ClickSpeedBkp = BakingBot.ConfigDefault.ClickSpeed
