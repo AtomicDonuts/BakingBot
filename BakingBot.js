@@ -16,10 +16,10 @@ BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if (BakingBot.now >= Game.startDate + 15*60*1000){
-		BakingBot.restart();
+		//BakingBot.restart();
 	}
 	BakingBot.autoclickbc();
-	BakingBot.autoclickgc();	
+	//BakingBot.autoclickgc();	
 }
 
 BakingBot.restart = function(){
@@ -163,4 +163,4 @@ if(Game.version == BakingBot.gameVersion){
 }else{ 
   Game.Notify("BakingBot News","Warning: BakingBot is last tested with "+"cookie clicker version " + BakingBot.gameVersion,[15,5],100);
 }
-
+BakingBot.starter = setInterval(BakingBot.run,300);
