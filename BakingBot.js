@@ -9,7 +9,6 @@ BakingBot.version = "0.001";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.waitfor = 0;
-//BakingBot.ClickSpeedBkp = BakingBot.ConfigDefault.ClickSpeed
 
 
 BakingBot.run = function(){
