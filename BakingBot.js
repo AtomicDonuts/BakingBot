@@ -26,10 +26,7 @@ BakingBot.restart = function(){
 	
 }
 
-BakingBot.autoclickbc = function(){
-	if(!BakingBot.autoclicker && (BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp))
-		//alert("cambio click speed");
-	
+BakingBot.autoclickbc = function(){	
 }
 
 //Utilities
