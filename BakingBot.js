@@ -19,14 +19,15 @@ BakingBot.run = function(){
 		BakingBot.restart();
 	}
 	BakingBot.autoclickbc();
-	BakingBot.autoclickgc();	
+	//BakingBot.autoclickgc();	
 }
 
 BakingBot.restart = function(){
 	
 }
 
-BakingBot.autoclickbc = function(){	
+BakingBot.autoclickbc = function(){
+	BakingBot.prova = (BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp);
 }
 
 //Utilities
