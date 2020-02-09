@@ -27,7 +27,16 @@ BakingBot.restart = function(){
 }
 
 BakingBot.autoclickbc = function(){
-	BakingBot.prova = (BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp);
+	if(BakingBot.Config.ClickSpeed != BakingBot.ClickSpeedBkp){
+		clearInterval(BakingBot.autoclicker);
+		
+	}
+	if(BakingBot.Config.ClickSpeed == 0) {
+		clearInterval(BakingBot.autoclicker);
+		return;
+	}
+	BakingBot.clickps = 1000/(BakingBot.Config.ClickSpeed * 3);
+	BakingBot.autoclicker = setInterval(Game.ClickCookie,BakingBot.clickps);	
 }
 
 //Utilities
