@@ -203,6 +203,14 @@ BakingBot.RenameBakery = function(){
 	}
 }
 
+BakingBot.Wait = function(sec){
+	var WaitingTime = Date.now();
+	while(Date.now() <= WaitingTime + (sec * 1000)){
+		//console.log(WaitingTime + (sec*1000) - Date.now());
+	}
+	console.log("I waited long enough");
+}
+
 //---------Init--------
 
 BakingBot.Inits = function(){
