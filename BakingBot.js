@@ -11,6 +11,7 @@ BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
 
 BakingBot.run = function(){
+	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if(BakingBot.now<BakingBot.WaitingTime) return;
@@ -231,6 +232,11 @@ BakingBot.Inits = function(){
 		BakingBot.RenameBakery();
 		
 	}
+}
+
+BakingBot.stopBot() = function(){
+	clearInterval(BakingBot.AutoClicker);
+	BakingBot.Notify("Congrats,you got it");
 }
 
 BakingBot.Inits();
