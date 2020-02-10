@@ -236,6 +236,7 @@ BakingBot.Inits = function(){
 
 BakingBot.stopBot = function(){
 	clearInterval(BakingBot.AutoClicker);
+	clearInterval(BakingBot.starter);
 	BakingBot.notify("Congrats,you got it");
 }
 
