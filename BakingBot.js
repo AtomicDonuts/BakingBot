@@ -8,7 +8,7 @@ if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.001";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
-
+BakingBot.AutoClicker = 0;
 
 BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
