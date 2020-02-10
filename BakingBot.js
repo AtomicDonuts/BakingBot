@@ -11,19 +11,28 @@ BakingBot.robotName = "BakingBot is helping ";
 BakingBot.SafeFirstRun = false;
 
 BakingBot.run = function(){
-	console.log("run")
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
-	BakingBot.RenameBakery();
 	BakingBot.now=Date.now();
-	if (BakingBot.now >= Game.startDate + 15*60*1000){
-		//BakingBot.restart();
+	if (BakingBot.now >= Game.startDate + 2*60*1000 + 10000 ){
+		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
 	//BakingBot.autoclickgc();	
 }
 
 BakingBot.restart = function(){
-	
+	var prestigeup = true;
+	if(Game.prestige == 0)
+		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
+	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
+		Game.Ascend(true);
+	}
+	if(prestigeup && !Game.Achievements["Speed baking III"].won && Game.OnAscend){
+		Game.PickAscensionMode();
+		Game.nextAscensionMode = 1; 
+		Game.ConfirmPrompt(); 
+		Game.Reincarnate(true);
+	}
 }
 
 BakingBot.AutoClickBigCookie = function(){
@@ -42,32 +51,6 @@ BakingBot.AutoClickBigCookie = function(){
 		BakingBot.ClickPS = 1000/(BakingBot.Config.ClickSpeed * 3);
 		BakingBot.AutoClicker = setInterval(Game.ClickCookie,BakingBot.ClickPS);
 		BakingBot.PreAutoClicker = BakingBot.AutoClicker;
-	}
-}
-
-//Utilities
-
-BakingBot.notify = function(BakingText) { 
-  console.log("Notify: "+BakingText); 
-  Game.Notify("BakingBot News",BakingText,[14,5],100); 
-}
-
-BakingBot.RenameBakery = function(){
-	if (Game.bakeryName.slice(0,BakingBot.robotName.length)!=BakingBot.robotName) { 
-		var bakeryName = Game.bakeryName;
-		Game.bakeryName = BakingBot.robotName+bakeryName; 
-		Game.bakeryNamePrompt(); Game.ConfirmPrompt();
-	}
-}	
-
-BakingBot.Inits = function(){
-	
-	var proceed = true;
-	if(Game.prestige == 0)
-		proceed = confirm('Seems like you are at your first run \nThis bot CAN RESET your progress by ascending.\nDo you still want to load BakingBot?');
-	if (proceed) {
-		console.log("eccomi")
-		BakingBot.starter = setInterval(BakingBot.run,300);
 	}
 }
 
@@ -204,13 +187,43 @@ Game.UpdateMenu = function() {
 		BakingBot.Disp.AddMenuPref();
 }	
 //}	
+
+//Utilities
+
+BakingBot.notify = function(BakingText) { 
+  console.log("Notify: "+BakingText); 
+  Game.Notify("BakingBot News",BakingText,[14,5],100); 
+}
+
+BakingBot.RenameBakery = function(){
+	if (Game.bakeryName.slice(0,BakingBot.robotName.length)!=BakingBot.robotName) { 
+		var bakeryName = Game.bakeryName;
+		Game.bakeryName = BakingBot.robotName+bakeryName; 
+		Game.bakeryNamePrompt(); Game.ConfirmPrompt();
+	}
+}
+
 //---------Init--------
 
-if(Game.version == BakingBot.gameVersion){
-	if (Game.prefs.popups) Game.Popup('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
-	else BakingBot.notify('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
-}else{ 
-  Game.Notify("BakingBot News","Warning: BakingBot is last tested with "+"cookie clicker version " + BakingBot.gameVersion,[15,5],100);
+BakingBot.Inits = function(){
+	
+	var proceed = true;
+	if(Game.prestige == 0)
+		proceed = confirm('Seems like you are at your first run \nThis bot CAN RESET your progress by ascending.\nDo you still want to load BakingBot?');
+	if (proceed) {
+		BakingBot.starter = setInterval(BakingBot.run,300);
+		
+		if(Game.version == BakingBot.gameVersion){
+			if (Game.prefs.popups) Game.Popup('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
+			else BakingBot.notify('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
+		}else{ 
+			Game.Notify("BakingBot News","Warning: BakingBot is last tested with "+"cookie clicker version " + BakingBot.gameVersion,[15,5],100);
+		}
+		
+		Game.Win('Third-party');
+		BakingBot.RenameBakery();
+		
+	}
 }
-Game.Win('Third-party');
+
 BakingBot.Inits();
