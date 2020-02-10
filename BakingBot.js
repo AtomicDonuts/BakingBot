@@ -14,7 +14,7 @@ BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if(BakingBot.now<BakingBot.WaitingTime) return;
-	if (BakingBot.now >= Game.startDate + 2*60*1000 + 10000 || Game.OnAscend){
+	if (BakingBot.now >= Game.startDate + 1*60*1000 || Game.OnAscend){
 		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
@@ -208,7 +208,7 @@ BakingBot.RenameBakery = function(){
 
 BakingBot.SetWaitingTime = function(sec){
 	var millisec = 1000 * sec
-	BakingBot.WaitingTime = BakingBot.now() + millisec;
+	BakingBot.WaitingTime = Date.now() + millisec;
 }
 //---------Init--------
 
