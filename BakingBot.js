@@ -8,7 +8,6 @@ if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.001";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
-BakingBot.SafeFirstRun = false;
 
 BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
@@ -201,14 +200,6 @@ BakingBot.RenameBakery = function(){
 		Game.bakeryName = BakingBot.robotName+bakeryName; 
 		Game.bakeryNamePrompt(); Game.ConfirmPrompt();
 	}
-}
-
-BakingBot.Wait = function(sec){
-	var WaitingTime = Date.now();
-	while(Date.now() <= WaitingTime + (sec * 1000)){
-		//console.log(WaitingTime + (sec*1000) - Date.now());
-	}
-	console.log("I waited long enough");
 }
 
 //---------Init--------
