@@ -54,6 +54,7 @@ BakingBot.notify = function(BakingText) {
 
 BakingBot.RenameBakery = function(){
 	if (Game.bakeryName.slice(0,BakingBot.robotName.length)!=BakingBot.robotName) { 
+		var bakeryName = Game.bakeryName;
 		Game.bakeryName = BakingBot.robotName+bakeryName; 
 		Game.bakeryNamePrompt(); Game.ConfirmPrompt();
 	}
