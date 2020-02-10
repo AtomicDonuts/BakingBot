@@ -8,11 +8,13 @@ if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.001";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
+BakingBot.WaitingTime = 0;
 
 BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
-	if (BakingBot.now >= Game.startDate + 2*60*1000 + 10000 ){
+	if(BakingBot.now<BakingBot.WaitingTime) return;
+	if (BakingBot.now >= Game.startDate + 2*60*1000 + 10000 || Game.OnAscend){
 		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
@@ -25,6 +27,8 @@ BakingBot.restart = function(){
 		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
 		Game.Ascend(true);
+		BakingBot.SetWaitingTime(3);
+		return;
 	}
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && Game.OnAscend){
 		Game.PickAscensionMode();
@@ -202,6 +206,10 @@ BakingBot.RenameBakery = function(){
 	}
 }
 
+BakingBot.SetWaitingTime = function(sec){
+	var millisec = 1000 * sec
+	BakingBot.WaitingTime = BakingBot.now() + millisec;
+}
 //---------Init--------
 
 BakingBot.Inits = function(){
