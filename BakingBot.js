@@ -223,7 +223,6 @@ BakingBot.NameItBack = function(){
 		Game.bakeryName = BakingBot.InitialBakeryName;
 		Game.bakeryNamePrompt();
 		Game.ConfirmPrompt();
-	}
 }
 
 BakingBot.SetWaitingTime = function(sec){
