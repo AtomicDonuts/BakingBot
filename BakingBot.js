@@ -9,17 +9,18 @@ BakingBot.version = "0.001";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
+BakingBot.AscendTimeWait = 15*60*1000 + 4000;
 
 BakingBot.run = function(){
 	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if(BakingBot.now<BakingBot.WaitingTime) return;
-	if (BakingBot.now >= Game.startDate + 2*60*1000 + 10000 || Game.OnAscend){
+	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend){
 		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
-	//BakingBot.autoclickgc();	
+	BakingBot.AutoClickGoldenCookie();
 }
 
 BakingBot.restart = function(){
@@ -28,7 +29,7 @@ BakingBot.restart = function(){
 		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
 		Game.Ascend(true);
-		BakingBot.SetWaitingTime(5);
+		BakingBot.SetWaitingTime(4);
 		return;
 	}
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && Game.OnAscend){
@@ -55,6 +56,14 @@ BakingBot.AutoClickBigCookie = function(){
 		BakingBot.ClickPS = 1000/(BakingBot.Config.ClickSpeed * 3);
 		BakingBot.AutoClicker = setInterval(Game.ClickCookie,BakingBot.ClickPS);
 		BakingBot.PreAutoClicker = BakingBot.AutoClicker;
+	}
+}
+
+BakingBot.AutoClickGoldenCookie = function(){
+	if(Game.shimmer.length == 0) return;
+	var max = Game.shimmers.length
+	for(var i = 0;i<max;i++){
+		Game.shimmers[0].pop();
 	}
 }
 
@@ -195,7 +204,7 @@ Game.UpdateMenu = function() {
 //Utilities
 
 BakingBot.notify = function(BakingText) { 
-  console.log("Notify: "+BakingText); 
+  console.log("BakingBot: "+BakingText); 
   Game.Notify("BakingBot News",BakingText,[14,5],100); 
 }
 
