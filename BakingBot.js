@@ -10,6 +10,7 @@ BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
 BakingBot.AscendTimeWait = 15*60*1000 + 4000;
+BakingBot.InitialBakeryName = ""
 
 BakingBot.run = function(){
 	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
@@ -210,9 +211,18 @@ BakingBot.notify = function(BakingText) {
 
 BakingBot.RenameBakery = function(){
 	if (Game.bakeryName.slice(0,BakingBot.robotName.length)!=BakingBot.robotName) { 
+		BakingBot.InitialBakeryName = Game.bakeryName;
 		var bakeryName = Game.bakeryName;
 		Game.bakeryName = BakingBot.robotName+bakeryName; 
-		Game.bakeryNamePrompt(); Game.ConfirmPrompt();
+		Game.bakeryNamePrompt(); 
+		Game.ConfirmPrompt();
+	}
+}
+
+BakingBot.NameItBack = function(){ 
+		Game.bakeryName = BakingBot.InitialBakeryName;
+		Game.bakeryNamePrompt();
+		Game.ConfirmPrompt();
 	}
 }
 
@@ -246,6 +256,8 @@ BakingBot.Inits = function(){
 BakingBot.stopBot = function(){
 	clearInterval(BakingBot.AutoClicker);
 	clearInterval(BakingBot.starter);
+	BakingBot.NameItBack();
+	Game.FileSave();
 	BakingBot.notify("Congrats,you got it");
 }
 
