@@ -22,6 +22,7 @@ BakingBot.run = function(){
 	}
 	BakingBot.AutoClickBigCookie();
 	BakingBot.AutoClickGoldenCookie();
+	BakingBot.CursorsBuy();
 }
 
 BakingBot.restart = function(){
@@ -40,6 +41,8 @@ BakingBot.restart = function(){
 		Game.Reincarnate(true);
 	}
 }
+
+//AutoCliking
 
 BakingBot.AutoClickBigCookie = function(){
 
@@ -67,6 +70,35 @@ BakingBot.AutoClickGoldenCookie = function(){
 		Game.shimmers[0].pop();
 	}
 }
+
+//Building
+
+BakingBot.CanIBuyB = function(id){
+	var b = Game.ObjectsById[id];
+	if(b.price < Game.cookies) return true;
+	return false;
+}
+
+BakingBot.CursorsBuy = function(){
+	var cursors = Game.ObjectsById[0];
+	if(cursors.amount < 10){
+		if(BakingBot.CanIBuyB(0))
+			cursors.buy();
+	}
+}
+
+BakingBot.GrandmaBuy = function(){
+	var grandma = Game.ObjectsById[1];
+
+}
+
+//Upgrade
+BakingBot.CanIBuyU = function(id){
+	var b = Game.Game.UpgradesById[id];
+	if(b.price < Game.cookies) return true;
+	return false;
+}
+
 
 //{Menu
 if(!BakingBot.Backup) BakingBot.Backup = {};
@@ -223,6 +255,7 @@ BakingBot.NameItBack = function(){
 		Game.bakeryName = BakingBot.InitialBakeryName;
 		Game.bakeryNamePrompt();
 		Game.ConfirmPrompt();
+	}
 }
 
 BakingBot.SetWaitingTime = function(sec){
