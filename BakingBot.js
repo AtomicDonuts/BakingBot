@@ -256,7 +256,6 @@ BakingBot.NameItBack = function(){
 		Game.bakeryNamePrompt();
 		Game.ConfirmPrompt();
 	}
-}
 
 BakingBot.SetWaitingTime = function(sec){
 	var millisec = 1000 * sec
