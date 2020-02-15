@@ -25,6 +25,7 @@ BakingBot.run = function(){
 	BakingBot.CursorsBuy();
 	BakingBot.CursorsUpgradeBuy();
 	BakingBot.GrandmaBuy();
+	BakingBot.GrandmaUpgradeBuy();
 }
 
 BakingBot.restart = function(){
@@ -97,6 +98,10 @@ BakingBot.GrandmaBuy = function(){
 				cursors.buy();
 		}
 	}
+}
+BakingBot.GrandmaUpgradeBuy = function(){
+	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
+	if(!Game.UpgradesById[8].bought && Game.UpgradesById[8].canBuy() && Game.UpgradesById[2].bought)	Game.UpgradesById[8].buy();
 }
 
 BakingBot.FrenzyShopping = function(){
