@@ -18,7 +18,7 @@ BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if(BakingBot.now<BakingBot.WaitingTime) return;
-	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend || Game.goldenClicksLocal == 2){
+	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend){
 		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
@@ -99,6 +99,7 @@ BakingBot.FrenzyShopping = function(){
 	if('Frenzy' in Game.buffs){
 		var farm = Game.ObjectsById[2];
 		if(farm.amount < 5 && BakingBot.CanIBuyB(2)) farm.buy();
+		if(farm.amount == 5 && Game.UpgradesById[8].canBuy()) farm.buy();
 	}
 }
 
