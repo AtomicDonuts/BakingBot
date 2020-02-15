@@ -18,7 +18,7 @@ BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if(BakingBot.now<BakingBot.WaitingTime) return;
-	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend){
+	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend || Game.shimmerTypes.golden.maxTime> 27000 || Game.shimmerTypes.golden.minTime> 9000  ){
 		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
@@ -26,7 +26,7 @@ BakingBot.run = function(){
 	
 	BakingBot.ObjectBuy();
 	BakingBot.UpgradeBuy();
-
+	BakingBot.FrenzyShopping();
 }
 
 BakingBot.restart = function(){
@@ -96,7 +96,7 @@ BakingBot.UpgradeBuy = function(){
 
 BakingBot.FrenzyShopping = function(){
 	//compra prima tot,poi se comprato return
-	if('Frenzy' in Game.buffs){
+	if('Frenzy' in Game.buffs || Game.goldenClicksLocal > 0){
 		var farm = Game.ObjectsById[2];
 		if(farm.amount < 5 && BakingBot.CanIBuyB(2)) farm.buy();
 		if(farm.amount == 5 && Game.UpgradesById[10].canBuy()) Game.UpgradesById[10].buy();
