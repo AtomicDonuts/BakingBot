@@ -12,6 +12,7 @@ BakingBot.WaitingTime = 0;
 BakingBot.AscendTimeWait = 15*60*1000 + 4000;
 BakingBot.InitialBakeryName = ""
 
+
 BakingBot.run = function(){
 	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
@@ -22,6 +23,8 @@ BakingBot.run = function(){
 	}
 	BakingBot.AutoClickBigCookie();
 	BakingBot.AutoClickGoldenCookie();
+	
+	BakingBot.LetsBoostSomeCPS();
 	BakingBot.CursorsBuy();
 	BakingBot.CursorsUpgradeBuy();
 	BakingBot.GrandmaBuy();
@@ -87,6 +90,7 @@ BakingBot.CursorsBuy = function(){
 BakingBot.CursorsUpgradeBuy = function(){
 	if(!Game.UpgradesById[0].bought && Game.UpgradesById[0].canBuy())	Game.UpgradesById[0].buy();
 	if(!Game.UpgradesById[1].bought && Game.UpgradesById[1].canBuy())	Game.UpgradesById[1].buy();
+	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
 	if(!Game.UpgradesById[2].bought && Game.UpgradesById[2].canBuy())	Game.UpgradesById[2].buy();
 }
 
@@ -102,6 +106,10 @@ BakingBot.GrandmaBuy = function(){
 BakingBot.GrandmaUpgradeBuy = function(){
 	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
 	if(!Game.UpgradesById[8].bought && Game.UpgradesById[8].canBuy() && Game.UpgradesById[2].bought)	Game.UpgradesById[8].buy();
+}
+
+BakingBot.LetsBoostSomeCPS = function(){
+	if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
 }
 
 BakingBot.FrenzyShopping = function(){
