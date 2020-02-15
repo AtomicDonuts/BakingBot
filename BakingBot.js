@@ -24,6 +24,7 @@ BakingBot.run = function(){
 	BakingBot.AutoClickGoldenCookie();
 	BakingBot.CursorsBuy();
 	BakingBot.CursorsUpgradeBuy();
+	BakingBot.GrandmaBuy();
 }
 
 BakingBot.restart = function(){
