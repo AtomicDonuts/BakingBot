@@ -99,7 +99,8 @@ BakingBot.FrenzyShopping = function(){
 	if('Frenzy' in Game.buffs){
 		var farm = Game.ObjectsById[2];
 		if(farm.amount < 5 && BakingBot.CanIBuyB(2)) farm.buy();
-		if(farm.amount == 5 && Game.UpgradesById[8].canBuy()) farm.buy();
+		if(farm.amount == 5 && Game.UpgradesById[10].canBuy()) Game.UpgradesById[10].buy();
+		if(farm.amount < 10 && BakingBot.CanIBuyB(2) && Game.UpgradesById[10].bought) farm.buy();
 	}
 }
 
