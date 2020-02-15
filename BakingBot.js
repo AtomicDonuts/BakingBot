@@ -18,17 +18,15 @@ BakingBot.run = function(){
 	if (Game.AscendTimer>0 || Game.ReincarnateTimer>0) return;
 	BakingBot.now=Date.now();
 	if(BakingBot.now<BakingBot.WaitingTime) return;
-	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend){
+	if (BakingBot.now >= Game.startDate + BakingBot.AscendTimeWait || Game.OnAscend || Game.goldenClicksLocal == 2){
 		BakingBot.restart();
 	}
 	BakingBot.AutoClickBigCookie();
 	BakingBot.AutoClickGoldenCookie();
 	
-	BakingBot.LetsBoostSomeCPS();
-	BakingBot.CursorsBuy();
-	BakingBot.CursorsUpgradeBuy();
-	BakingBot.GrandmaBuy();
-	BakingBot.GrandmaUpgradeBuy();
+	BakingBot.ObjectBuy();
+	BakingBot.UpgradeBuy();
+
 }
 
 BakingBot.restart = function(){
@@ -79,42 +77,31 @@ BakingBot.AutoClickGoldenCookie = function(){
 
 //Buying Stuff
 
-BakingBot.CursorsBuy = function(){
+BakingBot.ObjectBuy = function(){
 	var cursors = Game.ObjectsById[0];
-	if(cursors.amount < 10){
-		if(BakingBot.CanIBuyB(0))
-			cursors.buy();
-	}
+	var grandma = Game.ObjectsById[1];
+	if(cursors.amount < 10 && BakingBot.CanIBuyB(0)) cursors.buy();
+	if(Game.UpgradesById[1].bought && grandma.amount < 10 && BakingBot.CanIBuyB(1)) grandma.buy();
 }
 
-BakingBot.CursorsUpgradeBuy = function(){
+BakingBot.UpgradeBuy = function(){
+	if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
 	if(!Game.UpgradesById[0].bought && Game.UpgradesById[0].canBuy())	Game.UpgradesById[0].buy();
 	if(!Game.UpgradesById[1].bought && Game.UpgradesById[1].canBuy())	Game.UpgradesById[1].buy();
 	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
 	if(!Game.UpgradesById[2].bought && Game.UpgradesById[2].canBuy())	Game.UpgradesById[2].buy();
-}
-
-BakingBot.GrandmaBuy = function(){
-	var cursors = Game.ObjectsById[1];
-	if(Game.UpgradesById[1].bought){
-		if(cursors.amount < 10){
-			if(BakingBot.CanIBuyB(1))
-				cursors.buy();
-		}
-	}
-}
-BakingBot.GrandmaUpgradeBuy = function(){
 	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
 	if(!Game.UpgradesById[8].bought && Game.UpgradesById[8].canBuy() && Game.UpgradesById[2].bought)	Game.UpgradesById[8].buy();
 }
 
-BakingBot.LetsBoostSomeCPS = function(){
-	if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
-}
-
 BakingBot.FrenzyShopping = function(){
 	//compra prima tot,poi se comprato return
+	if('Frenzy' in Game.buffs){
+		var farm = Game.ObjectsById[2];
+		if(farm.amount < 5 && BakingBot.CanIBuyB(2)) farm.buy();
+	}
 }
+
 
 
 
