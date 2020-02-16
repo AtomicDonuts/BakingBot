@@ -33,7 +33,7 @@ BakingBot.run = function(){
 
 BakingBot.restart = function(){
 	var prestigeup = true;
-	if(Game.cookiesEarned > 999999) return;
+	//if(Game.cookiesEarned > 999999) return;
 	if(Game.prestige == 0 && !Game.OnAscend)
 		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
