@@ -295,7 +295,7 @@ BakingBot.CanIBuyB = function(id){
 
 BakingBot.CanIBuyBTen = function(id){
 	var b = Game.ObjectsById[id];
-	if(b.getSumPrice < Game.cookies) return true;
+	if(b.getSumPrice(10) < Game.cookies) return true;
 	return false;
 }
 
