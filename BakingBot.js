@@ -108,8 +108,8 @@ BakingBot.FrenzyShopping = function(){
 }
 
 BakingBot.ClickFrenzyShopping = function(){
-	if('Click frenzy' in Game.buffs){
-		if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
+	if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
+	if('Click frenzy' in Game.buffs && Game.UpgradesById[75].bought){
 		if(!Game.UpgradesById[11].bought && Game.UpgradesById[11].canBuy())	Game.UpgradesById[11].buy();
 		if(!Game.UpgradesById[16].bought && Game.UpgradesById[16].canBuy())	Game.UpgradesById[16].buy();
 		if(!Game.UpgradesById[3].bought && Game.UpgradesById[3].canBuy())	Game.UpgradesById[3].buy();
