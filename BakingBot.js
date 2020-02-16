@@ -88,14 +88,16 @@ BakingBot.ObjectBuy = function(){
 }
 
 BakingBot.UpgradeBuy = function(){
-	if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
-	if(!Game.UpgradesById[0].bought && Game.UpgradesById[0].canBuy())	Game.UpgradesById[0].buy();
-	if(!Game.UpgradesById[1].bought && Game.UpgradesById[1].canBuy())	Game.UpgradesById[1].buy();
-	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
-	if(!Game.UpgradesById[2].bought && Game.UpgradesById[2].canBuy())	Game.UpgradesById[2].buy();
-	if(!Game.UpgradesById[7].bought && Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought)	Game.UpgradesById[7].buy();
-	if(!Game.UpgradesById[8].bought && Game.UpgradesById[8].canBuy() && Game.UpgradesById[2].bought)	Game.UpgradesById[8].buy();
-  if(!Game.UpgradesById[10].bought && Game.ObjectsById[2].amount >= 5 && Game.UpgradesById[10].canBuy()) Game.UpgradesById[10].buy();
+	if(!Game.UpgradesById[75].bought	&& Game.UpgradesById[75].canBuy()	&& Game.UpgradesById[75].unlocked)	Game.UpgradesById[75].buy();
+	
+	if(!Game.UpgradesById[0].bought	&& Game.UpgradesById[0].canBuy()	&& Game.UpgradesById[0].unlocked)	Game.UpgradesById[0].buy();
+	if(!Game.UpgradesById[1].bought	&& Game.UpgradesById[1].canBuy()	&& Game.UpgradesById[1].unlocked)	Game.UpgradesById[1].buy();
+	if(!Game.UpgradesById[2].bought	&& Game.UpgradesById[2].canBuy()	&& Game.UpgradesById[2].unlocked)	Game.UpgradesById[2].buy();
+	
+	if(!Game.UpgradesById[7].bought	&& Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought	&& Game.UpgradesById[7].unlocked)	Game.UpgradesById[7].buy();
+	if(!Game.UpgradesById[8].bought	&& Game.UpgradesById[8].canBuy() && Game.UpgradesById[2].bought	&& Game.UpgradesById[8].unlocked)	Game.UpgradesById[8].buy();
+  
+	if(!Game.UpgradesById[10].bought	&& Game.ObjectsById[2].amount >= 5 && Game.UpgradesById[10].canBuy()	&& Game.UpgradesById[10].unlocked) Game.UpgradesById[10].buy();
 }
 
 BakingBot.FrenzyShopping = function(){
@@ -108,7 +110,7 @@ BakingBot.FrenzyShopping = function(){
 }
 
 BakingBot.ClickFrenzyShopping = function(){
-	if(!Game.UpgradesById[75].bought && Game.UpgradesById[75].canBuy())	Game.UpgradesById[75].buy();
+	if(!Game.UpgradesById[75].bought	&& Game.UpgradesById[75].canBuy()	&& Game.UpgradesById[75].unlocked)	Game.UpgradesById[75].buy();
 	if('Click frenzy' in Game.buffs && Game.UpgradesById[75].bought){
 		if(!Game.UpgradesById[11].bought && Game.UpgradesById[11].canBuy())	Game.UpgradesById[11].buy();
 		if(!Game.UpgradesById[16].bought && Game.UpgradesById[16].canBuy())	Game.UpgradesById[16].buy();
