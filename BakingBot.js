@@ -119,8 +119,8 @@ BakingBot.ClickFrenzyShopping = function(){
 		var mine = Game.ObjectsById[3];
 		if(mine.amount < 10 && BakingBot.CanIBuyB(3)) mine.buy();
 		if(farm.amount < 10 && BakingBot.CanIBuyB(2)) farm.buy();
-		if(grandma.amount < 20 && BakingBot.CanIBuyB(1)) grandma.buy();
-		if(cursors.amount < 30 && BakingBot.CanIBuyB(0)) cursors.buy();
+		if(grandma.amount < 20 && BakingBot.CanIBuyBTen(1)) grandma.buy(10);
+		if(cursors.amount < 30 && BakingBot.CanIBuyBTen(0)) cursors.buy(10);
 	}
 }
 
@@ -290,6 +290,12 @@ BakingBot.SetWaitingTime = function(sec){
 BakingBot.CanIBuyB = function(id){
 	var b = Game.ObjectsById[id];
 	if(b.price < Game.cookies) return true;
+	return false;
+}
+
+BakingBot.CanIBuyBTen = function(id){
+	var b = Game.ObjectsById[id];
+	if(b.getSumPrice < Game.cookies) return true;
 	return false;
 }
 
