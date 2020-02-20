@@ -41,6 +41,7 @@ BakingBot.restart = function(){
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
 		BakingBot.SavingList("failed");
 		BakingBot.AttemptsNumber++;
+		BakingBot.LastGoldenShimmer = [];
 		Game.Ascend(true);
 		BakingBot.SetWaitingTime(4);
 		return;
