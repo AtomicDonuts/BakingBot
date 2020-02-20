@@ -1,17 +1,18 @@
-// BakingBot 
+// BakingBot
 // bakingbot is a simple bot that will get "Speed Baking III" for you
-// since SB3 Achievements is basically based on luck and there isn't any real strategy ,it should be perfectly legit 
+// since SB3 Achievements is basically based on luck and there isn't any real strategy ,it should be perfectly legit
 
 
 var BakingBot
 if(!BakingBot) BakingBot = {};
-BakingBot.version = "0.201";
+BakingBot.version = "0.501";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
 BakingBot.AscendTimeWait = 15*60*1000 + 10000;
-BakingBot.InitialBakeryName = ""
-
+BakingBot.InitialBakeryName = "";
+BakingBot.LastGoldenShimmer = [];
+BakingBot.TrueVariable = true;
 
 BakingBot.run = function(){
 	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
@@ -23,12 +24,12 @@ BakingBot.run = function(){
 	}
 	BakingBot.AutoClickBigCookie();
 	BakingBot.AutoClickGoldenCookie();
-	
+
 	BakingBot.ClickFrenzyShopping();
 	BakingBot.FrenzyShopping();
 	BakingBot.ObjectBuy();
 	BakingBot.UpgradeBuy();
-	
+
 }
 
 BakingBot.restart = function(){
@@ -43,8 +44,8 @@ BakingBot.restart = function(){
 	}
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && Game.OnAscend){
 		Game.PickAscensionMode();
-		Game.nextAscensionMode = 1; 
-		Game.ConfirmPrompt(); 
+		Game.nextAscensionMode = 1;
+		Game.ConfirmPrompt();
 		Game.Reincarnate(true);
 	}
 }
@@ -75,6 +76,7 @@ BakingBot.AutoClickGoldenCookie = function(){
 	var max = Game.shimmers.length
 	for(var i = 0;i<max;i++){
 		Game.shimmers[0].pop();
+		BakingBot.UpdatingList();
 	}
 }
 
@@ -89,14 +91,14 @@ BakingBot.ObjectBuy = function(){
 
 BakingBot.UpgradeBuy = function(){
 	if(!Game.UpgradesById[75].bought	&& Game.UpgradesById[75].canBuy()	&& Game.UpgradesById[75].unlocked)	Game.UpgradesById[75].buy();
-	
+
 	if(!Game.UpgradesById[0].bought	&& Game.UpgradesById[0].canBuy()	&& Game.UpgradesById[0].unlocked)	Game.UpgradesById[0].buy();
 	if(!Game.UpgradesById[1].bought	&& Game.UpgradesById[1].canBuy()	&& Game.UpgradesById[1].unlocked)	Game.UpgradesById[1].buy();
 	if(!Game.UpgradesById[2].bought	&& Game.UpgradesById[2].canBuy()	&& Game.UpgradesById[2].unlocked)	Game.UpgradesById[2].buy();
-	
+
 	if(!Game.UpgradesById[7].bought	&& Game.UpgradesById[7].canBuy() && Game.UpgradesById[1].bought	&& Game.UpgradesById[7].unlocked)	Game.UpgradesById[7].buy();
 	if(!Game.UpgradesById[8].bought	&& Game.UpgradesById[8].canBuy() && Game.UpgradesById[2].bought	&& Game.UpgradesById[8].unlocked)	Game.UpgradesById[8].buy();
-  
+
 	if(!Game.UpgradesById[10].bought	&& Game.ObjectsById[2].amount >= 5 && Game.UpgradesById[10].canBuy()	&& Game.UpgradesById[10].unlocked) Game.UpgradesById[10].buy();
 }
 
@@ -125,6 +127,10 @@ BakingBot.ClickFrenzyShopping = function(){
 		if(cursors.amount < 30 && BakingBot.CanIBuyBTen(0)) cursors.buy(10);
 	}
 }
+//Progress handling
+BakingBot.UpdatingList = function() {
+	BakingBot.LastGoldenShimmer.push(Game.shimmerTypes.golden.last)
+}
 
 
 //{Menu
@@ -136,22 +142,22 @@ BakingBot.ConfigData = {};
 
 BakingBot.Disp = {};
 
-BakingBot.ConfigPrefix = 'BakingBotConfig';	
-	
+BakingBot.ConfigPrefix = 'BakingBotConfig';
+
 BakingBot.SaveConfig = function(config) {
   try {
     window.localStorage.setItem(BakingBot.ConfigPrefix, JSON.stringify(config));
   } catch (e) {}
-}	
-	
+}
+
 BakingBot.LoadConfig = function() {
   try {
     if (window.localStorage.getItem(BakingBot.ConfigPrefix) != null) {
 	  BakingBot.Config = JSON.parse(window.localStorage.getItem(BakingBot.ConfigPrefix));
-		
+
      // Check values
 	  var mod = false;
-		
+
 	  for (var i in BakingBot.ConfigDefault) {
 			if (typeof BakingBot.Config[i]==='undefined' || BakingBot.Config[i]<0 || BakingBot.Config[i]>=BakingBot.ConfigData[i].label.length) {
 				mod = true;
@@ -159,28 +165,28 @@ BakingBot.LoadConfig = function() {
 				BakingBot.PreConfig[i] = BakingBot.ConfigDefault[i];
 			}
 	  }
-		
-	  if (mod) 
+
+	  if (mod)
 			BakingBot.SaveConfig(BakingBot.Config);
-    } 
-		
+    }
+
 		else { // Default values
 	  BakingBot.RestoreDefault();
     }
   } catch (e) {}
-}	
-	
+}
+
 BakingBot.RestoreDefault = function() {
   BakingBot.Config = {};
 	BakingBot.PreConfig = {};
   BakingBot.SaveConfig(BakingBot.ConfigDefault);
   BakingBot.LoadConfig();
   Game.UpdateMenu();
-}	
+}
 
 BakingBot.ToggleConfig = function(config) {
   BakingBot.ToggleConfigUp(config);
-  l(BakingBot.ConfigPrefix + config).className = 
+  l(BakingBot.ConfigPrefix + config).className =
     BakingBot.Config[config]?'option':'option off';
 }
 
@@ -193,19 +199,18 @@ BakingBot.ToggleConfigUp = function(config) {
   BakingBot.SaveConfig(BakingBot.Config);
 }
 
-BakingBot.ConfigData.ClickSpeed = 
+BakingBot.ConfigData.ClickSpeed =
   {label: ['OFF','3','6','9','12','15','18'], desc: 'How many click in 1 sec'};
-	
-	
-BakingBot.ConfigDefault = {ClickSpeed: 2,};	
-BakingBot.LoadConfig();	
-	
+
+BakingBot.ConfigDefault = {ClickSpeed: 2,};
+BakingBot.LoadConfig();
+
 BakingBot.Disp.GetConfigDisplay = function(config) {
   return BakingBot.ConfigData[config].label[BakingBot.Config[config]];
-}	
-	
+}
+
 BakingBot.Disp.AddMenuPref = function() {
-	
+
   var header = function(text) {
 		var div = document.createElement('div');
 		div.className = 'listing';
@@ -216,27 +221,27 @@ BakingBot.Disp.AddMenuPref = function() {
 		div.textContent = text;
 		return div;
   }
-	
+
   var frag = document.createDocumentFragment();
-	
+
   var div = document.createElement('div');
-	
+
   div.className = 'title ' + BakingBot.Disp.colorTextPre + BakingBot.Disp.colorBlue;
-	
+
   div.textContent = 'BakingBot Options';
-	
+
   frag.appendChild(div);
-	
+
   var listing = function(config,clickFunc) {
 		var div = document.createElement('div');
 		div.className = 'listing';
 		var a = document.createElement('a');
 		a.className = 'option';
-		if (BakingBot.Config[config] == 0) 
+		if (BakingBot.Config[config] == 0)
 			a.className = 'option off';
 		a.id = BakingBot.ConfigPrefix + config;
-		a.onclick = function() { 
-			BakingBot.ToggleConfig(config); 
+		a.onclick = function() {
+			BakingBot.ToggleConfig(config);
 		};
 		if (clickFunc) a.onclick = clickFunc;
 			a.textContent = BakingBot.Disp.GetConfigDisplay(config);
@@ -246,57 +251,44 @@ BakingBot.Disp.AddMenuPref = function() {
 		div.appendChild(label);
 		return div;
   }
-	
+
   frag.appendChild(listing('ClickSpeed',null));
   l('menu').childNodes[2].insertBefore(frag, l('menu').childNodes[2].childNodes[l('menu').childNodes[2].childNodes.length - 1]);
 
 }
-	
+
 if (!BakingBot.Backup.UpdateMenu) BakingBot.Backup.UpdateMenu = Game.UpdateMenu;
 
 Game.UpdateMenu = function() {
   BakingBot.Backup.UpdateMenu();
-  if (Game.onMenu == 'prefs') 
+  if (Game.onMenu == 'prefs')
 		BakingBot.Disp.AddMenuPref();
-}	
-//}	
+}
+//}
 
 //{ BakingSesame
-	
-	BakingBot.BakingSesame = function(){
-		var str='';
-		str+='<div class="icon" style="position:absolute;left:-9px;top:-6px;background-position:'+(-14*48)+'px '+(-5*48)+'px;"></div>';
-		//str+='<div style="position:absolute;left:0px;top:0px;z-index:10;font-size:10px;background:#000;padding:1px;" id="fpsCounter"></div>';
-		
-		str+='<div id="devConsoleContent">';
-		str+='<div class="title" style="font-size:14px;margin:6px;">BakingBot Infopoint</div>';
-		
-		l('devConsole').innerHTML=str;
-		
-		
-		
-		
+BakingBot.BakingSesame = function(){
+	//WIP
 	}
 //}
 
 //Utilities
-
-BakingBot.notify = function(BakingText) { 
-  console.log("BakingBot: "+BakingText); 
-  Game.Notify("BakingBot News",BakingText,[14,5],100); 
+BakingBot.notify = function(BakingText) {
+  console.log("BakingBot: "+BakingText);
+  Game.Notify("BakingBot News",BakingText,[14,5],100);
 }
 
 BakingBot.RenameBakery = function(){
-	if (Game.bakeryName.slice(0,BakingBot.robotName.length)!=BakingBot.robotName) { 
+	if (Game.bakeryName.slice(0,BakingBot.robotName.length)!=BakingBot.robotName) {
 		BakingBot.InitialBakeryName = Game.bakeryName;
 		var bakeryName = Game.bakeryName;
-		Game.bakeryName = BakingBot.robotName+bakeryName; 
-		Game.bakeryNamePrompt(); 
+		Game.bakeryName = BakingBot.robotName+bakeryName;
+		Game.bakeryNamePrompt();
 		Game.ConfirmPrompt();
 	}
 }
 
-BakingBot.NameItBack = function(){ 
+BakingBot.NameItBack = function(){
 		Game.bakeryName = BakingBot.InitialBakeryName;
 		Game.bakeryNamePrompt();
 		Game.ConfirmPrompt();
@@ -335,23 +327,23 @@ BakingBot.LoadCSS=function(url){
 //---------Init--------
 
 BakingBot.Inits = function(){
-	
+
 	var proceed = true;
 	if(Game.prestige == 0)
 		proceed = confirm('Seems like you are at your first run \nThis bot CAN RESET your progress by ascending.\nDo you still want to load BakingBot?');
 	if (proceed) {
 		BakingBot.starter = setInterval(BakingBot.run,300);
-		
+
 		if(Game.version == BakingBot.gameVersion){
 			if (Game.prefs.popups) Game.Popup('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
 			else BakingBot.notify('BakingBot v.'+BakingBot.version+' for version ' + BakingBot.gameVersion + ' loaded!');
-		}else{ 
+		}else{
 			Game.Notify("BakingBot News","Warning: BakingBot is last tested with "+"cookie clicker version " + BakingBot.gameVersion,[15,5],100);
 		}
-		
+
 		Game.Win('Third-party');
 		BakingBot.RenameBakery();
-		
+
 	}
 }
 
