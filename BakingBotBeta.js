@@ -9,11 +9,11 @@ BakingBot.version = "0.501";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
-BakingBot.AscendTimeWait = 15*60*1000 + 10000;
+BakingBot.AscendTimeWait = 1*60*1000 + 10000;
 BakingBot.InitialBakeryName = "";
 BakingBot.LastGoldenShimmer = [];
 BakingBot.TrueVariable = true;
-BakingBot.AttemptsNumber = 0;
+BakingBot.AttemptsNumber = 1;
 
 BakingBot.run = function(){
 	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
@@ -40,6 +40,7 @@ BakingBot.restart = function(){
 		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
 		BakingBot.SavingList("failed");
+		BakingBot.AttemptsNumber++;
 		Game.Ascend(true);
 		BakingBot.SetWaitingTime(4);
 		return;
@@ -152,7 +153,7 @@ BakingBot.SavingList = function(WasThatASuccess) {
 	str += "Golden Cookies Clicked: "+ Game.goldenClicksLocal +"\n"
 	str += "Golden: "
 	for (var i = 0; i < BakingBot.LastGoldenShimmer.length; i++) {
-		str += BakingBot.LastGoldenShimmer[i]	+ " "
+		str += BakingBot.LastGoldenShimmer[i]	+ ", "
 	}
 	var blob=new Blob([str],{type:'text/plain;charset=utf-8'});
 	saveAs(blob,'BakingBotLog_n'+ BakingBot.AttemptsNumber+'.txt');
@@ -386,6 +387,7 @@ BakingBot.Inits = function(){
 }
 
 BakingBot.stopBot = function(){
+	BakingBot.SavingList("Success");
 	clearInterval(BakingBot.AutoClicker);
 	clearInterval(BakingBot.starter);
 	BakingBot.NameItBack();
