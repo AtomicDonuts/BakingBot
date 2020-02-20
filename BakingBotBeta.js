@@ -13,6 +13,7 @@ BakingBot.AscendTimeWait = 15*60*1000 + 10000;
 BakingBot.InitialBakeryName = "";
 BakingBot.LastGoldenShimmer = [];
 BakingBot.TrueVariable = true;
+BakingBot.AttemptsNumber = 0;
 
 BakingBot.run = function(){
 	if (Game.Achievements["Speed baking III"].won) BakingBot.stopBot();
@@ -38,6 +39,7 @@ BakingBot.restart = function(){
 	if(Game.prestige == 0 && !Game.OnAscend)
 		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
+		BakingBot.SavingList("failed")
 		Game.Ascend(true);
 		BakingBot.SetWaitingTime(4);
 		return;
@@ -132,6 +134,29 @@ BakingBot.UpdatingList = function() {
 	BakingBot.LastGoldenShimmer.push(Game.shimmerTypes.golden.last)
 }
 
+BakingBot.ListWOStorm = function(){
+	array = BakingBot.LastGoldenShimmer;
+	var list = []
+	for (var i = 0; i < array.length; i++) {
+		if (array[i] != "cookie storm drop") list.push(array[i])
+	}
+	BakingBot.LastGoldenShimmer = list
+}
+
+BakingBot.SavingList = function(WasThatASuccess) {
+	BakingBot.ListWOStorm();
+	var str = "BakingBot LogList\n"
+	str += "Attempt n." + BakingBot.AttemptsNumber + " " + WasThatASuccess + "\n"
+	str += "Attempt started: " + BakingBot.TimeConverter(Game.startDate)  + "\n"
+	str += "Cookie Baked: " + Game.cookiesEarned + "\n"
+	str += "Golden Cookies: " + Clicked: Game.goldenClicksLocal +"\n"
+	str += "Golden: "
+	for (var i = 0; i < BakingBot.LastGoldenShimmer.length; i++) {
+		str += BakingBot.LastGoldenShimmer[i]	+ " "
+	}
+	var blob=new Blob([str],{type:'text/plain;charset=utf-8'});
+	saveAs(blob,'BakingBotLog_n'+ BakingBot.AttemptsNumber+'.txt');
+}
 
 //{Menu
 if(!BakingBot.Backup) BakingBot.Backup = {};
@@ -323,6 +348,19 @@ BakingBot.LoadCSS=function(url){
 	console.log('Loaded the CSS file from '+url+', ID name: '+id);
 }
 
+BakingBot.TimeConverter = function(UNIX_timestamp)	{
+	//Ty random guy on https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
+	var a = new Date(UNIX_timestamp);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+}
 
 //---------Init--------
 
