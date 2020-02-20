@@ -5,7 +5,7 @@
 
 var BakingBot
 if(!BakingBot) BakingBot = {};
-BakingBot.version = "0.501";
+BakingBot.version = "0.301";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
@@ -140,6 +140,7 @@ BakingBot.ListWOStorm = function(){
 	array = BakingBot.LastGoldenShimmer;
 	var list = []
 	for (var i = 0; i < array.length; i++) {
+		if (array[i] == "multiply cookies" ) list.push("Lucky")
 		if (array[i] != "cookie storm drop") list.push(array[i])
 	}
 	BakingBot.LastGoldenShimmer = list
@@ -150,7 +151,7 @@ BakingBot.SavingList = function(WasThatASuccess) {
 	var str = "BakingBot LogList\n"
 	str += "Attempt n." + BakingBot.AttemptsNumber + " " + WasThatASuccess + "\n"
 	str += "Attempt started: " + BakingBot.TimeConverter(Game.startDate)  + "\n"
-	str += "Cookie Baked: " + Game.cookiesEarned + "\n"
+	str += "Cookie Baked: " + Beautify(Game.cookiesEarned) + "\n"
 	str += "Golden Cookies Clicked: "+ Game.goldenClicksLocal +"\n"
 	str += "Golden: "
 	for (var i = 0; i < BakingBot.LastGoldenShimmer.length; i++) {
