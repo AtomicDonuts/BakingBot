@@ -39,7 +39,7 @@ BakingBot.restart = function(){
 	if(Game.prestige == 0 && !Game.OnAscend)
 		prestigeup = confirm("Press OK to Ascend\nYou will LOSE all the cookie in your bakery");
 	if(prestigeup && !Game.Achievements["Speed baking III"].won && !Game.OnAscend){
-		BakingBot.SavingList("failed")
+		BakingBot.SavingList("failed");
 		Game.Ascend(true);
 		BakingBot.SetWaitingTime(4);
 		return;
@@ -149,7 +149,7 @@ BakingBot.SavingList = function(WasThatASuccess) {
 	str += "Attempt n." + BakingBot.AttemptsNumber + " " + WasThatASuccess + "\n"
 	str += "Attempt started: " + BakingBot.TimeConverter(Game.startDate)  + "\n"
 	str += "Cookie Baked: " + Game.cookiesEarned + "\n"
-	str += "Golden Cookies: " + Clicked: Game.goldenClicksLocal +"\n"
+	str += "Golden Cookies Clicked: "+ Game.goldenClicksLocal +"\n"
 	str += "Golden: "
 	for (var i = 0; i < BakingBot.LastGoldenShimmer.length; i++) {
 		str += BakingBot.LastGoldenShimmer[i]	+ " "
