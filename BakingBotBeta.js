@@ -5,14 +5,13 @@
 
 var BakingBot
 if(!BakingBot) BakingBot = {};
-BakingBot.version = "0.301";
+BakingBot.version = "0.3	01";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
-BakingBot.AscendTimeWait = 1*60*1000 + 10000;
+BakingBot.AscendTimeWait = 15*60*1000 + 10000;
 BakingBot.InitialBakeryName = "";
 BakingBot.LastGoldenShimmer = [];
-BakingBot.TrueVariable = true;
 BakingBot.AttemptsNumber = 1;
 
 BakingBot.run = function(){
