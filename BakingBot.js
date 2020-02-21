@@ -292,12 +292,6 @@ Game.UpdateMenu = function() {
 }
 //}
 
-//{ BakingSesame
-BakingBot.BakingSesame = function(){
-	//WIP
-	}
-//}
-
 //Utilities
 BakingBot.notify = function(BakingText) {
   console.log("BakingBot: "+BakingText);
