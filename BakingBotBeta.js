@@ -2,10 +2,9 @@
 // bakingbot is a simple bot that will get "Speed Baking III" for you
 // since SB3 Achievements is basically based on luck and there isn't any real strategy ,it should be perfectly legit
 
-
 var BakingBot
 if(!BakingBot) BakingBot = {};
-BakingBot.version = "0.301";
+BakingBot.version = "0.300";
 BakingBot.gameVersion = "2.022";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
