@@ -330,19 +330,6 @@ BakingBot.CanIBuyBTen = function(id){
 	if(b.getSumPrice(10) < Game.cookies) return true;
 	return false;
 }
-
-BakingBot.LoadCSS=function(url){
-	var fileref=document.createElement('link');
-	var id=url.split('/');id=id[id.length-1].split('.')[0];
-	fileref.setAttribute("rel", "stylesheet")
-	fileref.setAttribute("type", "text/css")
-	fileref.setAttribute("href", url)
-	fileref.setAttribute('id','cssmod_'+id);
-
-	document.head.appendChild(fileref);
-	console.log('Loaded the CSS file from '+url+', ID name: '+id);
-}
-
 BakingBot.TimeConverter = function(UNIX_timestamp)	{
 	//Ty random guy on https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
 	var a = new Date(UNIX_timestamp);
