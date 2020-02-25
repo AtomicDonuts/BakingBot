@@ -1,7 +1,7 @@
 # BakingBot
-**BakingBot** is an add-on witch will help you with "Speed baking III" achievement. When it run, he will autoclick the big cookie (you can select the speed) and the golden cookies, then buy buildings and upgrade. "Speed baking III" is mostly based on luck, you need to get a "click frenzy" for unlocking it, the best way to make this happen is by playing a lot, with this bot you can just load the script and it will eventually get if for you.
+**BakingBot** is an add-on witch will help you with "Speed baking III" achievement. When it runs, he will autoclick the big cookie (you can select the speed) and the golden cookies, then buy buildings and upgrade. "Speed baking III" is mostly based on luck, you need to get a "click frenzy" for unlocking it, the best way to make this happen is by playing a lot, with this bot you can just load the script and it will eventually get if for you.
 
-## How it work?
+## How does it work?
 BakingBot will automatically ascend if you have more then 1M cookies in the bakery.Then it will set the gamemode in to "Born again" mode and reincarnate.
 BB then will start clicking the BigCookie,goldencookie,buying building and upgrade untill min 15 (and 10 seconds).
 Then,it will start the cycle over again.
