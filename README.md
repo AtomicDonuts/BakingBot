@@ -1,6 +1,5 @@
 # BakingBot
-**BakingBot** is an add-on you can load into Cookie Clicker, that will unlock the "Speed baking III" achievements for you.
-To get "Speed baking III" you dont need an actually strategy, you only need luck (or a lot of time), so the bot will get it for you.
+**BakingBot** is an add-on witch will help you with "Speed baking III" achievement. When it run, he will autoclick the big cookie (you can select the speed) and the golden cookies, then buy buildings and upgrade. "Speed baking III" is mostly based on luck, you need to get a "click frenzy" for unlocking it, the best way to make this happen is by playing a lot, with this bot you can just load the script and it will eventually get if for you.
 
 ## How it work?
 BakingBot will automatically ascend if you have more then 1M cookies in the bakery.Then it will set the gamemode in to "Born again" mode and reincarnate.
@@ -9,7 +8,7 @@ Then,it will start the cycle over again.
 
 ## Limitations
 The buying strategy used in this bot its not the best possible.
-I have used my experience to create a reasonable path,and it accually worked.  
+I have used my experience to create a reasonable path,and it actually worked.  
 In the options there is the possibility to choose the speed of clicking.
 Even if it is present, it is not recommended to choose "3",it will probably removed in some new versions.
 
