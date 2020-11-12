@@ -5,7 +5,7 @@
 var BakingBot
 if(!BakingBot) BakingBot = {};
 BakingBot.version = "0.300";
-BakingBot.gameVersion = "2.022";
+BakingBot.gameVersion = "2.031";
 BakingBot.robotName = "BakingBot is helping ";
 BakingBot.WaitingTime = 0;
 BakingBot.AscendTimeWait = 15*60*1000 + 10000;
